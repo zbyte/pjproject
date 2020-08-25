@@ -1909,6 +1909,8 @@ void MediaEvent::fromPj(const pjmedia_event &ev)
     if (type == PJMEDIA_EVENT_FMT_CHANGED) {
         data.fmtChanged.newWidth = ev.data.fmt_changed.new_fmt.det.vid.size.w;
         data.fmtChanged.newHeight = ev.data.fmt_changed.new_fmt.det.vid.size.h;
+        data.fmtChanged.newFpsNum = ev.data.fmt_changed.new_fmt.det.vid.fps.num;
+        data.fmtChanged.newFpsDenum = ev.data.fmt_changed.new_fmt.det.vid.fps.denum;
     } else if (type == PJMEDIA_EVENT_AUD_DEV_ERROR) {
 	data.audDevError.dir = ev.data.aud_dev_err.dir;
 	data.audDevError.id = ev.data.aud_dev_err.id;

@@ -2511,6 +2511,8 @@ struct MediaFmtChangedEvent
 {
     unsigned newWidth;      /**< The new width.     */
     unsigned newHeight;     /**< The new height.    */
+    unsigned newFpsNum;     /**< The new frames per second numerator.   */
+    unsigned newFpsDenum;   /**< The new frames per second denumerator. */
 };
 
 /**
