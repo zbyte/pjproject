@@ -306,7 +306,9 @@ pjmedia_vid_dev_opengl_imp_create_stream(pj_pool_t *pool,
     strm->display = EGL_NO_DISPLAY;
     
     vfd = pjmedia_format_get_video_format_detail(&strm->param.fmt, PJ_TRUE);
+    PJ_LOG(3, (THIS_FILE, "Create stream: video stream clock_rate %d, video format %d fps", param->clock_rate, &vfd->fps));
     strm->ts_inc = PJMEDIA_SPF2(param->clock_rate, &vfd->fps, 1);
+    PJ_LOG(3, (THIS_FILE, "Samples per frame value %d", strm->ts_inc));
     
     /* Set video format */
     status = andgl_stream_set_cap(&strm->base, PJMEDIA_VID_DEV_CAP_FORMAT,
