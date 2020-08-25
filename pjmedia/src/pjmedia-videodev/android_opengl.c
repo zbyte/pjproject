@@ -242,6 +242,7 @@ static pj_status_t render(void * data)
     if (stream->display == EGL_NO_DISPLAY || stream->err_rend == 0)
     	return PJ_SUCCESS;
     
+    PJ_LOG(3, (THIS_FILE, "Render start"));
     pjmedia_vid_dev_opengl_draw(stream->gl_buf, stream->vid_size.w,
                                 stream->vid_size.h, stream->frame->buf);
         
@@ -256,6 +257,7 @@ static pj_status_t render(void * data)
         }
         return eglGetError();
     }
+    PJ_LOG(3, (THIS_FILE, "Render end"));
     
     return PJ_SUCCESS;
 }
@@ -306,7 +308,7 @@ pjmedia_vid_dev_opengl_imp_create_stream(pj_pool_t *pool,
     strm->display = EGL_NO_DISPLAY;
     
     vfd = pjmedia_format_get_video_format_detail(&strm->param.fmt, PJ_TRUE);
-    PJ_LOG(3, (THIS_FILE, "Create stream: video stream clock_rate %d, video format %d fps", param->clock_rate, &vfd->fps));
+    PJ_LOG(3, (THIS_FILE, "Create stream: video stream clock_rate %d, video format %d fps", param->clock_rate, vfd->fps.num));
     strm->ts_inc = PJMEDIA_SPF2(param->clock_rate, &vfd->fps, 1);
     PJ_LOG(3, (THIS_FILE, "Samples per frame value %d", strm->ts_inc));
     
@@ -485,6 +487,7 @@ static pj_status_t andgl_stream_put_frame(pjmedia_vid_dev_stream *strm,
 	return PJ_EINVALIDOP;
     
     stream->frame = frame;
+    PJ_LOG(3, (THIS_FILE, "Put frame"));
     job_queue_post_job(stream->jq, render, strm, 0, &status);
     
     return status;
