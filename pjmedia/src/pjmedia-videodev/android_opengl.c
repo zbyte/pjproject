@@ -168,7 +168,7 @@ static pj_status_t init_opengl(void * data)
     {
         EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT, EGL_SURFACE_TYPE,
         EGL_WINDOW_BIT, EGL_BLUE_SIZE, 8, EGL_GREEN_SIZE, 8,
-	EGL_RED_SIZE, 8, EGL_DEPTH_SIZE, 8, EGL_NONE
+	EGL_RED_SIZE, 8, EGL_DEPTH_SIZE, 16, EGL_NONE
     };
     EGLint context_attr[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE };
     EGLConfig config;
@@ -242,7 +242,6 @@ static pj_status_t render(void * data)
     if (stream->display == EGL_NO_DISPLAY || stream->err_rend == 0)
     	return PJ_SUCCESS;
     
-    PJ_LOG(3, (THIS_FILE, "Render start"));
     pjmedia_vid_dev_opengl_draw(stream->gl_buf, stream->vid_size.w,
                                 stream->vid_size.h, stream->frame->buf);
         
@@ -257,7 +256,6 @@ static pj_status_t render(void * data)
         }
         return eglGetError();
     }
-    PJ_LOG(3, (THIS_FILE, "Render end"));
     
     return PJ_SUCCESS;
 }

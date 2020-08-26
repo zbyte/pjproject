@@ -282,7 +282,7 @@ pj_status_t pjmedia_vid_dev_opengl_draw(gl_buffers *glb, unsigned int width,
     glBindTexture(GL_TEXTURE_2D, glb->rendTex);
     
     /* Set texture parameters */
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -290,7 +290,7 @@ pj_status_t pjmedia_vid_dev_opengl_draw(gl_buffers *glb, unsigned int width,
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)width, (GLsizei)height,
     		 0, GL_BGRA, GL_UNSIGNED_BYTE, (GLvoid *)pixels);
     
-    glFlush();
+    //glFlush();
     
     /* Do we render directly to the screen? */
     glBindFramebuffer(GL_FRAMEBUFFER, (glb->direct? 0: glb->frameBuf));
